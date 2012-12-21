@@ -8,23 +8,22 @@
  function registration_restriction_admin() {
    $form = array();
 
+   $form['registration_restriction_valid_domains'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Valid email domains'),
+    '#default_value' => variable_get('registration_restriction_valid_domains'),
+    '#description' => t('Enter in valid email domains (the part after the "@" symbol). Seperate each with a comma, i.e. "drexel.edu, umass.edu"'),
+    '#required' => TRUE,
+    );
+
    $form['registration_restriction_error_message'] = array(
     '#type' => 'textfield',
-    '#title' => t('Registration Restriction Error Test'),
+    '#title' => t('Invalid email domain message'),
     '#default_value' => variable_get('registration_restriction_error_message'),
     '#size' => 100,
     '#description' => t('This text is displayed when a user puts in an invalid email domain'),
     '#required' => TRUE,
    );
-
-   $form['registration_restriction_valid_domains'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Valid email domains'),
-    '#default_value' => variable_get('registration_restriction_valid_domains'),
-    '#size' => 100,
-    '#description' => t('Enter in valid domains. Seperate each with a comma, i.e. "drexel.edu, umass.edu"'),
-    '#required' => TRUE,
-    );
 
    return system_settings_form($form);
  }
@@ -47,7 +46,7 @@
 
 
   function registration_restriction_form_alter(&$form, &$form_state, $form_id) {
-    dpm(variable_get('registration_restriction_error_message'));
+
   // make sure this is the register form
     if ($form_id == 'user_register_form') {
   // this adds your custom validation function to the form validation array
@@ -56,9 +55,9 @@
   }
 
   function registration_restriction_user_register_validation($form, &$form_state) {
-  // Schools
-    $schoolDomains = array('drexel.edu');
-  
+  // Valid Domains from configuration form
+    $valid_domains = explode(",", variable_get('registration_restriction_valid_domains'));
+
   // Get domain 
         $email = $form_state['values']['mail'];
         $splitIndex = strpos($email, '@')+1;
@@ -66,7 +65,7 @@
         $domain = substr($email, $splitIndex, $emailLength);
         
   // Error if not legitimate domain  
-    if ( !in_array($domain, $schoolDomains) ) {
+    if ( !in_array($domain, $valid_domains) ) {
       
      $message = variable_get('registration_restriction_error_message');
 
