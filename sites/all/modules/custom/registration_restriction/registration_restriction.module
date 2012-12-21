@@ -8,14 +8,16 @@
  function registration_restriction_admin() {
    $form = array();
 
-   $form['registration_restriction_error_text'] = array(
+   $form['registration_restriction_error_message'] = array(
     '#type' => 'textfield',
     '#title' => t('Registration Restriction Error Test'),
-    '#default_value' => variable_get('registration_restriction_error_message', 'asdasf'),
+    '#default_value' => variable_get('registration_restriction_error_message'),
     '#size' => 100,
     '#description' => t('This text is displayed when a user puts in an invalid email domain'),
     '#required' => TRUE,
    );
+
+   $form['#submit'][] = 'system_settings_form_submit';
 
    return system_settings_form($form);
  }
