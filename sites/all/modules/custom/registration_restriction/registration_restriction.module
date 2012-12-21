@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Specifies rules for restricting user registration based on email domains.
+ * Got this from here: http://drupal.org/node/1405368
+ */
+
+ function registration_restriction_admin() {
+   $form = array();
+
+   $form['registration_restriction_error_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Registration Restriction Error Test'),
+    '#default_value' => variable_get('registration_restriction_error_message', 'asdasf'),
+    '#size' => 100,
+    '#description' => t('This text is displayed when a user puts in an invalid email domain'),
+    '#required' => TRUE,
+   );
+
+   return system_settings_form($form);
+ }
+
+ function registration_restriction_menu() {
+   $items = array();
+
+   $items['admin/config/people/registration-restriction'] = array(
+    'title' => t('Registration Restriction module settings'),
+    'description' => t('Settings for restricting userregistration to spcified email domains'),
+    'access callback' => TRUE,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('registration_restriction_admin'),
+    'access arguments' => array('administer registration_restriction settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+
+   return $items;
+ }
+
+
+  function registration_restriction_form_alter(&$form, &$form_state, $form_id) {
+    dpm(variable_get('registration_restriction_error_message'));
+  // make sure this is the register form
+    if ($form_id == 'user_register_form') {
+  // this adds your custom validation function to the form validation array
+     $form['#validate'][] = 'registration_restriction_user_register_validation';
+    }
+  }
+
+  function registration_restriction_user_register_validation($form, &$form_state) {
+  // Schools
+    $schoolDomains = array('drexel.edu');
+  
+  // Get domain 
+        $email = $form_state['values']['mail'];
+        $splitIndex = strpos($email, '@')+1;
+        $emailLength = strlen($email);
+        $domain = substr($email, $splitIndex, $emailLength);
+        
+  // Error if not legitimate domain  
+    if ( !in_array($domain, $schoolDomains) ) {
+      
+     $message = variable_get('registration_restriction_error_message');
+
+     form_set_error('mail', $message);
+    }
+  }
