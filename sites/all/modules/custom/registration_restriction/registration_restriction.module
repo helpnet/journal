@@ -17,7 +17,14 @@
     '#required' => TRUE,
    );
 
-   $form['#submit'][] = 'system_settings_form_submit';
+   $form['registration_restriction_valid_domains'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Valid email domains'),
+    '#default_value' => variable_get('registration_restriction_valid_domains'),
+    '#size' => 100,
+    '#description' => t('Enter in valid domains. Seperate each with a comma, i.e. "drexel.edu, umass.edu"'),
+    '#required' => TRUE,
+    );
 
    return system_settings_form($form);
  }
