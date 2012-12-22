@@ -52,11 +52,30 @@
    return $items;
  }
 
-   // Helper function to remove whitespace
-   
-   function trim_value(&$value) {
-       $value = trim($value);
+ // Helper function to remove whitespace
+ 
+ function trim_value(&$value) {
+     $value = trim($value);
+ }
+
+ // Helper function for checking valid emails
+
+ function registration_restriction_is_restricted_domain($domain, $listed_domains) {
+   if (variable_get('registration_restriction_type') == 'blacklist') {
+     if ( in_array($domain, $listed_domains) ) {
+       return TRUE;
+     } else {
+       return FALSE;
+     }
+   } else {
+     if ( !in_array($domain, $listed_domains) ) {
+       return TRUE;
+     } else {
+       return FALSE;
+     }
    }
+ }
+
 
   function registration_restriction_form_alter(&$form, &$form_state, $form_id) {
 
@@ -69,8 +88,8 @@
 
   function registration_restriction_user_register_validation($form, &$form_state) {
   // Valid Domains from configuration form
-    $valid_domains = explode(",", variable_get('registration_restriction_valid_domains'));
-    array_walk($valid_domains, 'trim_value');
+    $listed_domains = explode(",", variable_get('registration_restriction_valid_domains'));
+    array_walk($listed_domains, 'trim_value');
 
   // Get domain 
         $email = $form_state['values']['mail'];
@@ -79,7 +98,7 @@
         $domain = substr($email, $splitIndex, $emailLength);
         
   // Error if not legitimate domain  
-    if ( !in_array($domain, $valid_domains) ) {
+    if ( registration_restriction_is_restricted_domain($domain, $listed_domains) ) {
       
      $message = variable_get('registration_restriction_error_message');
 
