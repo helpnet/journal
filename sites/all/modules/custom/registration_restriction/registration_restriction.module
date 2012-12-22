@@ -10,10 +10,18 @@
 
    $form['registration_restriction_valid_domains'] = array(
     '#type' => 'textarea',
-    '#title' => t('Valid email domains'),
+    '#title' => t('Email domains'),
     '#default_value' => variable_get('registration_restriction_valid_domains'),
-    '#description' => t('Enter in valid email domains (the part after the "@" symbol). Seperate each with a comma, i.e. "drexel.edu, umass.edu"'),
+    '#description' => t('Enter in email domains (the part after the "@" symbol). Seperate each with a comma, i.e. "drexel.edu, umass.edu."'),
     '#required' => TRUE,
+    );
+
+   $form['registration_restriction_type'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Blacklist listed domains'),
+    '#description' => t('Check to blacklist these email domains (i.e. allow all domains EXCEPT ones listed here). The default is whitelist.'),
+    '#default_value' => variable_get('registration_restriction_type'),
+    '#return_value' => 'blacklist',
     );
 
    $form['registration_restriction_error_message'] = array(
