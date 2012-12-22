@@ -44,6 +44,11 @@
    return $items;
  }
 
+   // Helper function to remove whitespace
+   
+   function trim_value(&$value) {
+       $value = trim($value);
+   }
 
   function registration_restriction_form_alter(&$form, &$form_state, $form_id) {
 
@@ -57,6 +62,7 @@
   function registration_restriction_user_register_validation($form, &$form_state) {
   // Valid Domains from configuration form
     $valid_domains = explode(",", variable_get('registration_restriction_valid_domains'));
+    array_walk($valid_domains, 'trim_value');
 
   // Get domain 
         $email = $form_state['values']['mail'];
