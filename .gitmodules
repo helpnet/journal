@@ -1,3 +1,6 @@
 [submodule "registration_restriction"]
 	path = registration_restriction
 	url = aboutblank@git.drupal.org:sandbox/aboutblank/1872752.git
+[submodule "sites/all/modules/custom/registration_restriction"]
+	path = sites/all/modules/custom/registration_restriction
+	url = aboutblank@git.drupal.org:sandbox/aboutblank/1872752.git
