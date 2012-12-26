@@ -1,0 +1,18 @@
+<?php
+/**
+ * @file
+ * Code for the journal_views feature.
+ */
+
+include_once 'journal_views.features.inc';
+
+function journal_views_form_alter(&$form, $form_state, $form_id) {
+  if ( (isset($form_state['view']->name)) && ($form_state['view']->name != 'view_journal_entries')) {
+    return;
+  }
+
+  $form['flagged']['#options']['All'] = "View all posts";
+  $form['flagged']['#options'][1] = "View all read posts";
+  $form['flagged']['#options'][0] = "View all unread posts";
+
+}
