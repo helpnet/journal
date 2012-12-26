@@ -1,6 +1,0 @@
-name = Registration Restriction
-description = Specifies rules for restricting user registration based on email domains.
-package = Development
-core = 7.x
-
-
