@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the journal_user_page feature.
+ */
+
+include_once 'journal_user_page.features.inc';

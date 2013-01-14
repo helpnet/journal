@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the journal_content_types feature.
+ */
+
+include_once 'journal_content_types.features.inc';
