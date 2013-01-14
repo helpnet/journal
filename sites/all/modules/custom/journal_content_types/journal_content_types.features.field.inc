@@ -52,11 +52,19 @@ function journal_content_types_field_default_fields() {
         ),
         'teaser' => array(
           'label' => 'hidden',
-          'module' => 'field_ellipsis',
+          'module' => 'smart_trim',
           'settings' => array(
-            'trim_length' => 600,
+            'more_link' => '0',
+            'more_text' => 'Read more',
+            'summary_handler' => 'full',
+            'trim_length' => '600',
+            'trim_options' => array(
+              'text' => 0,
+            ),
+            'trim_suffix' => '...',
+            'trim_type' => 'chars',
           ),
-          'type' => 'text_trimmed_ellipsis',
+          'type' => 'smart_trim_format',
           'weight' => '0',
         ),
       ),
@@ -144,7 +152,7 @@ function journal_content_types_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'media',
+        'module' => 'file',
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
@@ -156,9 +164,19 @@ function journal_content_types_field_default_fields() {
             'image' => 'image',
             'video' => 0,
           ),
+          'insert' => 0,
+          'insert_absolute' => FALSE,
+          'insert_class' => '',
+          'insert_default' => array(
+            0 => 'auto',
+          ),
+          'insert_styles' => array(
+            0 => 'auto',
+          ),
+          'insert_width' => '',
           'progress_indicator' => 'throbber',
         ),
-        'type' => 'media_generic',
+        'type' => 'file_generic',
         'weight' => '3',
       ),
     ),
@@ -231,6 +249,13 @@ function journal_content_types_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
+          'allowed_schemes' => array(
+            0 => 'public',
+            1 => 'private',
+          ),
+          'allowed_types' => array(
+            0 => 'image',
+          ),
           'insert' => 1,
           'insert_absolute' => 0,
           'insert_class' => '',

@@ -1,13 +1,14 @@
 name = journal_content_types
 core = 7.x
 package = Features
+php = 5.2.4
 dependencies[] = features
-dependencies[] = field_ellipsis
 dependencies[] = field_sql_storage
 dependencies[] = file
 dependencies[] = image
 dependencies[] = media
 dependencies[] = node
+dependencies[] = smart_trim
 dependencies[] = text
 features[features_api][] = api:1
 features[field][] = node-journal_entry-field_entry_body
