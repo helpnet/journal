@@ -16,3 +16,4 @@ features[field][] = node-journal_entry-field_image_upload
 features[field][] = node-webform-body
 features[node][] = journal_entry
 features[node][] = webform
+stylesheets[all][] = styles.css
