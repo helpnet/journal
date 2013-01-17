@@ -146,7 +146,7 @@ function journal_content_types_field_default_fields() {
       'settings' => array(
         'description_field' => 0,
         'file_directory' => '[current-user:uid]',
-        'file_extensions' => 'txt doc docx xls xlsx csv pdf',
+        'file_extensions' => 'txt doc docx xls xlsx csv pdf ppt pptx',
         'max_filesize' => '',
         'user_register_form' => FALSE,
       ),
@@ -154,24 +154,19 @@ function journal_content_types_field_default_fields() {
         'active' => 1,
         'module' => 'file',
         'settings' => array(
-          'allowed_schemes' => array(
-            'public' => 'public',
-          ),
-          'allowed_types' => array(
-            0 => 0,
-            'audio' => 0,
-            'default' => 0,
-            'image' => 'image',
-            'video' => 0,
-          ),
           'insert' => 0,
-          'insert_absolute' => FALSE,
+          'insert_absolute' => 0,
           'insert_class' => '',
-          'insert_default' => array(
-            0 => 'auto',
-          ),
+          'insert_default' => 'auto',
           'insert_styles' => array(
-            0 => 'auto',
+            'auto' => 'auto',
+            'icon_link' => 0,
+            'image' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_square_thumbnail' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
           ),
           'insert_width' => '',
           'progress_indicator' => 'throbber',
