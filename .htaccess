@@ -129,3 +129,7 @@ DirectoryIndex index.php index.html index.htm
     </FilesMatch>
   </IfModule>
 </IfModule>
+
+AddType application/vnd.openxmlformats-officedocument.presentationml.presentation pptx
+AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document docx
+AddType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet xlsx
