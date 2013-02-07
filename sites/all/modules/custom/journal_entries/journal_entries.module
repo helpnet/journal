@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the journal_entries feature.
+ */
+
+include_once 'journal_entries.features.inc';
