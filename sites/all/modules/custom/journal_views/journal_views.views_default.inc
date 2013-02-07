@@ -166,6 +166,12 @@ function journal_views_views_default_views() {
   $handler->display->display_options['fields']['type']['group_type'] = 'count';
   $handler->display->display_options['fields']['type']['ui_name'] = 'Aggregate number of entries';
   $handler->display->display_options['fields']['type']['label'] = 'Number of Journal Entries';
+  /* Field: SUM(Content: Has new content) */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'history';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['timestamp']['group_type'] = 'sum';
   /* Sort criterion: Taxonomy term: Cohort Term Code (field_cohort_term_code) */
   $handler->display->display_options['sorts']['field_cohort_term_code_value']['id'] = 'field_cohort_term_code_value';
   $handler->display->display_options['sorts']['field_cohort_term_code_value']['table'] = 'field_data_field_cohort_term_code';
