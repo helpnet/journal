@@ -26,7 +26,7 @@ function journal_menus_menu_default_menu_links() {
     'external' => '1',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '0',
+    'weight' => '-50',
   );
   // Exported menu link: user-menu:user
   $menu_links['user-menu:user'] = array(
